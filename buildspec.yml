@@ -5,9 +5,8 @@ phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 
-      - REPOSITORY_URI=
-      - echo "dckr_pat_pAaIib4LHq1Pv0T9oTCUOszh-eQ" | docker login --username "" --password-stdin
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 908027385477.dkr.ecr.us-east-1.amazonaws.com
+      - echo "dckr_pat_pAaIib4LHq1Pv0T9oTCUOszh-eQ" | docker login --username "sudip22" --password-stdin
       - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
 
   build:
@@ -23,7 +22,7 @@ phases:
       - docker push $REPOSITORY_URI:latest
       - docker push $REPOSITORY_URI:$IMAGE_TAG
       - echo Writing imagedefinitions.json file...
-      - DOCKER_CONTAINER_NAME=
+      - DOCKER_CONTAINER_NAME=neupane-sudip-assignment3
       - printf '[{"name":"%s","imageUri":"%s"}]' $DOCKER_CONTAINER_NAME $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
       - echo $DOCKER_CONTAINER_NAME
       - echo printing imagedefinitions.json
