@@ -1,4 +1,3 @@
-
 version: 0.2
 
 phases:
@@ -6,7 +5,7 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 908027385477.dkr.ecr.us-east-1.amazonaws.com
-      - echo "dckr_pat_2VCQMGL1Am-30roMhqcAx5CmRK4" | docker login --username "sudip22" --password-stdin
+      - REPOSITORY_URI=908027385477.dkr.ecr.us-east-1.amazonaws.com/neupane-sudip-assignment3
       - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
 
   build:
